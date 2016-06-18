@@ -36,16 +36,14 @@ trait PresenterTemplatesReplacementsHelperTrait
 
 			do {
 				$replacementPath = implode('/', $actionParts);
-				$fullReplacementPath = $appDir . '/templates' . $replacementPath . "/@$layout.latte";
-				$list[] = $fullReplacementPath;
+				$list[] = $appDir . '/templates' . $replacementPath . "/@$layout.latte";
 
 				if ($first) {
-					$fullReplacementPath = $appDir . '/templates' . $replacementPath . ".@$layout.latte";
-					$list[] = $fullReplacementPath;
+					$list[] = $appDir . '/templates' . $replacementPath . ".@$layout.latte";
+					$first = FALSE;
 				}
 
 				array_pop($actionParts);
-				$first = FALSE;
 			} while ($actionParts);
 		}
 
