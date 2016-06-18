@@ -2,16 +2,15 @@
 
 namespace Wunderman\CmsCore\DI;
 
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManagerInterface;
 use Nette\DI\CompilerExtension;
-use Nette\DI\ContainerBuilder;
 use Nette\DI\Helpers;
 use Wunderman\CmsCore\DI\Factories\DoctrineFactory;
-use Wunderman\CmsCore\DI\Factories\IDoctrineManagerFactory;
+use Wunderman\CmsCore\Helpers\ExtensionHelperTrait;
 
 class Extension extends CompilerExtension
 {
-	use ExtensionHelper;
+	use ExtensionHelperTrait;
 
 	protected $defaults = [
 		'doctrine' => [
@@ -23,26 +22,23 @@ class Extension extends CompilerExtension
 		]
 	];
 
-	protected function configure(ContainerBuilder $containerBuilder)
+	public function loadConfiguration()
 	{
 		$parameters = $this->getConfig($this->defaults);
-
-		$configurationDefinition = $containerBuilder->addDefinition($this->prefix('doctrine.configuration'))
-			->setClass(Setup::class)
-			->addSetup(
-				'createConfiguration',
+		$containerBuilder = $this->loadDefaultConfiguration(__DIR__);
+		$containerBuilder->addDefinition('wunderman.cms.doctrine.entity.manager.factory')
+			->setClass(
+				DoctrineFactory::class,
 				[
 					Helpers::expand('%debugMode%', $containerBuilder->parameters),
-					Helpers::expand('%tempDir%/doctrine', $containerBuilder->parameters)
+					Helpers::expand('%tempDir%/doctrine', $containerBuilder->parameters),
+					$parameters['doctrine']
 				]
-			);
-
-		$managerFactoryDefinition = $containerBuilder->addDefinition($this->prefix('doctrine.entity.manager.factory'))
-			->setClass(DoctrineFactory::class, [$configurationDefinition, $parameters['doctrine']]);
+			)
+			->addSetup('addPaths', [__DIR__ . '/../Modules']);
 
 		$containerBuilder->addDefinition($this->prefix('doctrine.entity.manager'))
-			->setClass(IDoctrineManagerFactory::class)
-			->setFactory($managerFactoryDefinition);
+			->setClass(EntityManagerInterface::class)
+			->setFactory('@wunderman.cms.doctrine.entity.manager.factory::create');
 	}
-
 }

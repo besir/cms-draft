@@ -1,0 +1,4 @@
+name: WundermanCmsExtensionTest
+mapping: Wunderman\CmsExtensionTest\Modules\*Module\Presenters\*Presenter
+routes:
+	'admin/test': WundermanCmsExtensionTest:Admin:Test:default

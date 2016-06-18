@@ -28,3 +28,4 @@ WundermanCmsCore:
 
 extensions:
 	WundermanCmsCore: Wunderman\CmsCore\DI\Extension
+	WundermanCmsExtensionTest: Wunderman\CmsExtensionTest\DI\Extension

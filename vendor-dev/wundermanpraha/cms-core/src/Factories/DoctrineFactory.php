@@ -5,8 +5,9 @@ namespace Wunderman\CmsCore\DI\Factories;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Tools\Setup;
 
-class DoctrineFactory implements IDoctrineManagerFactory
+class DoctrineFactory
 {
 	/** @var Configuration */
 	protected $configuration;
@@ -17,17 +18,18 @@ class DoctrineFactory implements IDoctrineManagerFactory
 	/** @var array */
 	protected $parameters;
 
-	public function __construct(Configuration $configuration, array $parameters)
+	public function __construct($isDevMode, $proxyDir, array $parameters)
 	{
+		$configuration = Setup::createConfiguration($isDevMode, $proxyDir);
 		$this->configuration = $configuration;
 		$this->parameters = $parameters;
 		$this->annotationDriver = $this->configuration->newDefaultAnnotationDriver([], FALSE);
 		$this->configuration->setMetadataDriverImpl($this->annotationDriver);
 	}
 
-	public function addPaths(array $paths)
+	public function addPaths($paths)
 	{
-		$this->annotationDriver->addPaths($paths);
+		$this->annotationDriver->addPaths((array)$paths);
 	}
 
 	/**

@@ -1,11 +1,11 @@
 <?php
-namespace Wunderman\CmsCore\Modules\AdminModule\Presenters;
+namespace Wunderman\CmsExtensionTest\Modules\AdminModule\Presenters;
 
 use Nette;
 use Nette\Application\UI\Presenter;
 use Wunderman\CmsCore\Helpers\PresenterTemplatesReplacementsHelperTrait;
 
-class ExtensionsPresenter extends Presenter
+class TestPresenter extends Presenter
 {
 	use PresenterTemplatesReplacementsHelperTrait;
 }
