@@ -1,0 +1,26 @@
+{
+  "name": "wundermanpraha/cms-core",
+  "type": "library",
+  "description": "This is a core of the CMS",
+  "license": "GNU GPL v3",
+  "support": {
+    "issues": "https://github.com/wundermanpraha/cms-core/issues"
+  },
+  "authors": [
+    {
+      "name": "Petr Besir Horáček",
+      "email": "sirbesir@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Wunderman\\CmsCore\\": "src/"
+    }
+  },
+  "require": {
+    "doctrine/orm": "2.5.*"
+  },
+  "minimum-stability": "dev",
+  "require-dev": {
+  }
+}

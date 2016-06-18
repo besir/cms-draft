@@ -1,0 +1,5 @@
+mapping:
+	WundermanCmsCore: Wunderman\CmsCore\Modules\*Module\Presenters\*Presenter
+
+routes:
+	'admin/extensions/list': WundermanCmsCore:Admin:Extensions:list

@@ -1,0 +1,25 @@
+{
+  "name": "wundermanpraha/cms-extension-test",
+  "type": "library",
+  "description": "This is a test extension for CMS",
+  "license": "GNU GPL v3",
+  "support": {
+    "issues": "https://github.com/wundermanpraha/cms-extension-test/issues"
+  },
+  "authors": [
+    {
+      "name": "Petr Besir Horáček",
+      "email": "sirbesir@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Wunderman\\CmsExtensionTest\\": "src/"
+    }
+  },
+  "require": {
+  },
+  "minimum-stability": "dev",
+  "require-dev": {
+  }
+}
